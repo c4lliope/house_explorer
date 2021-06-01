@@ -36,6 +36,14 @@ plus some additional sources:
 
 ![early designs](./images/early_designs.svg =400x600)
 
+## Build Schedule
+
+* Preamble (Day 0)
+  * Read challenge.
+  * Begin producing README, decide on goals.
+  * Begin designing program.
+  * Launch codebase; run `create-react-app` and add dependencies.
+
 ## Commands
 
 You can run:
