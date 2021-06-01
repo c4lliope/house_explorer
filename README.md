@@ -29,7 +29,7 @@ plus some additional sources:
     * one mini, dense, high-level graph displaying summary of roll calls
     * one per-member table to see individuals' voting records.
   * Use a datatable, such as `react-table` or `react-data-grid` packages.
-  * Display member images from `congress.gov`. (Check: any XSS restrictions?)
+  * Display member images from `congress.gov`. (Check: any XSS restrictions? no)
   * Optionally group members by party and caucus affiliation, display breakdown.
 
 > Early designs
