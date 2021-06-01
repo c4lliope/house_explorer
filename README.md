@@ -19,3 +19,15 @@ plus some additional sources:
 * `clerkapi.azure-api.net/Members/v1/...`
 * `clerkapi.azure-api.net/Votes/v1/...`
 * `congress.gov/img/member/...`
+
+## Goals
+
+* Secure code
+  * No recorded API key in the public codebase. (use `.env` file and ask in-app)
+* Dense display of records
+  * Add a couple of visualizations to ease exploration
+    * one mini, dense, high-level graph displaying summary of roll calls
+    * one per-member table to see individuals' voting records.
+  * Use a datatable, such as `react-table` or `react-data-grid` packages.
+  * Display member images from `congress.gov`. (Check: any XSS restrictions?)
+  * Optionally group members by party and caucus affiliation, display breakdown.
