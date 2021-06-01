@@ -9,11 +9,11 @@ My goals are to build up in iterations a program to explore the records,
 mixing and matching as the user pleases.
 To accomplish this goal I will use libraries I am experienced with, including:
 
-* React
+* [React](https://reactjs.org/)
 * styled-components
 * Mobx
 
-I will pull records from the recommended API channels,
+The program will pull records from the recommended API channels,
 plus some additional sources:
 
 * `clerkapi.azure-api.net/Members/v1/...`
@@ -31,3 +31,7 @@ plus some additional sources:
   * Use a datatable, such as `react-table` or `react-data-grid` packages.
   * Display member images from `congress.gov`. (Check: any XSS restrictions?)
   * Optionally group members by party and caucus affiliation, display breakdown.
+
+> Early designs
+
+![early designs](./images/early_designs.svg =400x600)
