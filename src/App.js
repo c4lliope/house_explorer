@@ -13,12 +13,12 @@ class Memory {
 
 var memory = new Memory()
 
-// setTimeout(() => {
+setTimeout(() => {
   memory.members.push({
     name: "Alma S. Adams",
     image: "https://www.congress.gov/img/member/a000370_200.jpg",
   })
-// }, 1000)
+}, 1000)
 
 var columns = [
   { key: "name", name: "Name" },
@@ -33,12 +33,12 @@ var rows = [
 ]
 
 function App() {
+  console.log(memory.members.length)
+
   return (
-    <Observer>{() => (
-      <div>
-        <Grid columns={columns} rows={memory.members} rowHeight={() => 120 }/>
-      </div>
-    )}</Observer>
+    <div>
+      <Grid columns={columns} rows={memory.members} rowHeight={() => 120 }/>
+    </div>
   );
 }
 
