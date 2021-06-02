@@ -4,20 +4,10 @@ import { Observer, observer } from "mobx-react"
 
 class Memory {
   members = []
-
-  constructor() {
-    makeAutoObservable(this)
-  }
+  constructor() { makeAutoObservable(this) }
 }
 
 var memory = new Memory()
-
-setTimeout(() => {
-  memory.members.push({
-    name: "Alma S. Adams",
-    image: "https://www.congress.gov/img/member/a000370_200.jpg",
-  })
-}, 1000)
 
 var columns = [
   {
@@ -26,9 +16,6 @@ var columns = [
     formatter: ({ row }) => <img style={{ height: "80px" }} src={row.image} alt={row.name} />,
   },
   { key: "name", name: "Name" },
-]
-
-var rows = [
 ]
 
 function App() {
@@ -41,6 +28,12 @@ function App() {
   );
 }
 
-window.memory = memory
+// Simulate a delayed network request.
+setTimeout(() => {
+  memory.members.push({
+    name: "Alma S. Adams",
+    image: "https://www.congress.gov/img/member/a000370_200.jpg",
+  })
+}, 1000)
 
 export default observer(App)
