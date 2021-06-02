@@ -2,6 +2,10 @@ import Grid from "react-data-grid"
 import { makeAutoObservable, autorun } from "mobx"
 import { Observer, observer } from "mobx-react"
 
+// API endpoints; copied from command line:
+// `https://clerkapi.azure-api.net/Votes/v1/?$filter=superEvent/superEvent/congressNum%20eq%20%27117%27&key=${process.env.REACT_APP_API_KEY}`
+// `https://clerkapi.azure-api.net/Members/v1/?key=${process.env.REACT_APP_API_KEY}`
+
 class Memory {
   members = []
   constructor() { makeAutoObservable(this) }
