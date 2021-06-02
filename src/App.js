@@ -23,7 +23,7 @@ var columns = [
   {
     key: "image",
     name: "Image",
-    formatter: ({ row }) => <img style={{ height: "120px" }} src={row.image} alt={row.name} />,
+    formatter: ({ row }) => <img style={{ height: "80px" }} src={row.image} alt={row.name} />,
   },
   { key: "name", name: "Name" },
 ]
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div>
-      <Grid columns={columns} rows={memory.members} rowHeight={() => 120 }/>
+      <Grid columns={columns} rows={memory.members} rowHeight={() => 80 }/>
     </div>
   );
 }
