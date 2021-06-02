@@ -7,7 +7,6 @@ class Memory {
 
   constructor() {
     makeAutoObservable(this)
-    autorun(() => console.log(this.members.length, "members in memory"))
   }
 }
 
@@ -33,7 +32,7 @@ var rows = [
 ]
 
 function App() {
-  console.log(memory.members.length)
+  console.log("rendering", memory.members.length, "members")
 
   return (
     <div>
