@@ -20,12 +20,12 @@ setTimeout(() => {
 }, 1000)
 
 var columns = [
-  { key: "name", name: "Name" },
   {
     key: "image",
     name: "Image",
     formatter: ({ row }) => <img style={{ height: "120px" }} src={row.image} alt={row.name} />,
   },
+  { key: "name", name: "Name" },
 ]
 
 var rows = [
