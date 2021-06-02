@@ -1,4 +1,5 @@
 import Grid from "react-data-grid"
+import styled from "styled-components"
 import { makeAutoObservable, autorun } from "mobx"
 import { Observer, observer } from "mobx-react"
 
@@ -26,9 +27,9 @@ function App() {
   console.log("rendering", memory.members.length, "members")
 
   return (
-    <div>
+    <Page>
       <Grid columns={columns} rows={memory.members} rowHeight={() => 80 }/>
-    </div>
+    </Page>
   );
 }
 
@@ -42,5 +43,15 @@ fetch(`https://clerkapi.azure-api.net/Members/v1/?key=${process.env.REACT_APP_AP
     })
   })
 })
+
+var Page = styled.div`
+height: 100vh;
+display: grid;
+grid-template-rows: 1fr;
+
+.rdg {
+height: 100%;
+}
+`
 
 export default observer(App)
