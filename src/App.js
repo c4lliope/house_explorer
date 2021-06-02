@@ -32,12 +32,15 @@ function App() {
   );
 }
 
-// Simulate a delayed network request.
-setTimeout(() => {
-  memory.members.push({
-    name: "Alma S. Adams",
-    image: "https://www.congress.gov/img/member/a000370_200.jpg",
+fetch(`https://clerkapi.azure-api.net/Members/v1/?key=${process.env.REACT_APP_API_KEY}`)
+.then(response => response.json())
+.then(response => {
+  response.results.forEach(api_member => {
+    memory.members.push({
+      name: api_member.officialName,
+      image: `https://www.congress.gov/img/member/${api_member._id.toLowerCase()}_200.jpg`,
+    })
   })
-}, 1000)
+})
 
 export default observer(App)
