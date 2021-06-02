@@ -37,10 +37,12 @@ fetch(`https://clerkapi.azure-api.net/Members/v1/?key=${process.env.REACT_APP_AP
 .then(response => response.json())
 .then(response => {
   response.results.forEach(api_member => {
-    memory.members.push({
-      name: api_member.officialName,
-      image: `https://www.congress.gov/img/member/${api_member._id.toLowerCase()}_200.jpg`,
-    })
+    if(api_member.active === "yes") {
+      memory.members.push({
+        name: api_member.officialName,
+        image: `https://www.congress.gov/img/member/${api_member._id.toLowerCase()}_200.jpg`,
+      })
+    }
   })
 })
 
