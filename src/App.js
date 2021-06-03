@@ -21,14 +21,8 @@ var columns = [
   { key: "rollCallNum", name: "Number" },
   { key: "endDate", name: "Date" },
   { key: "name", name: "Name", resizable: true },
-  { key: "committee", name: "Committee", formatter: (row) => (
-    (row.committee === "U.S. House of Representatives") ? "" : <span>{row.committee}</span>
-  )},
   { key: "legisNum", name: "Code" },
   { key: "result", name: "Result" },
-  { key: "voteQuestion", name: "Question", formatter: (row) => (
-    (row.name === row.voteQuestion) ? "" : row.voteQuestion
-  )},
   { key: "voteType", name: "Type" },
 ]
 
