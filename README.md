@@ -50,6 +50,8 @@ plus some additional sources:
 * Day 2
   * Build a pager function to load in all member records.
   * Make pager function generic to handle a second API endpoint.
+  * Realize designed interface is very clunky for so many members.
+  * Query second API call and reconfigure table to show vote counts.
 
 ## Commands
 
