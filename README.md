@@ -52,6 +52,8 @@ plus some additional sources:
   * Make pager function generic to handle a second API endpoint.
   * Realize designed interface is very clunky for so many members.
   * Query second API call and reconfigure table to show vote counts.
+  * Explore the voting records manually and decide on a new design approach.
+  * Cache long-running API calls using LocalStorage.
 
 ## Commands
 
