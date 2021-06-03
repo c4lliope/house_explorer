@@ -3,9 +3,11 @@ import styled from "styled-components"
 import { makeAutoObservable, autorun } from "mobx"
 import { Observer, observer } from "mobx-react"
 
-// API endpoints; copied from command line:
-// `https://clerkapi.azure-api.net/Votes/v1/?$filter=superEvent/superEvent/congressNum%20eq%20%27117%27&key=${process.env.REACT_APP_API_KEY}`
-// `https://clerkapi.azure-api.net/Members/v1/?key=${process.env.REACT_APP_API_KEY}`
+// API endpoints:
+// `https://clerkapi.azure-api.net/Votes/v1/?$filter=superEvent/superEvent/congressNum%20eq%20%27117%27&key=${key}`
+// `https://clerkapi.azure-api.net/Members/v1/?key=${key}`
+
+var key = process.env.REACT_APP_API_KEY
 
 class Memory {
   members = []
@@ -18,7 +20,9 @@ var columns = [
   {
     key: "image",
     name: "Image",
-    formatter: ({ row }) => <img style={{ height: "80px" }} src={row.image} alt={row.name} />,
+    formatter: ({ row }) => (
+      <img style={{ height: "80px" }} src={row.image} alt={row.name} />
+    ),
   },
   { key: "name", name: "Name" },
 ]
@@ -33,18 +37,35 @@ function App() {
   );
 }
 
-fetch(`https://clerkapi.azure-api.net/Members/v1/?key=${process.env.REACT_APP_API_KEY}`)
-.then(response => response.json())
-.then(response => {
-  response.results.forEach(api_member => {
-    if(api_member.active === "yes") {
-      memory.members.push({
-        name: api_member.officialName,
-        image: `https://www.congress.gov/img/member/${api_member._id.toLowerCase()}_200.jpg`,
-      })
+var pullRecordPages = (link, page, per_page) => {
+  fetch(link + `&$skip=${page * per_page}`)
+  .then(response => response.json())
+  .then(response => {
+    response.results.forEach(api_member => {
+      if(api_member.active === "yes") {
+        memory.members.push(parse_member_response(api_member))
+      }
+    })
+    return response
+  })
+  .then(response => {
+    if(response.pagination.page !== response.pagination.number_pages) {
+      console.log(response.pagination.page)
+      pullRecordPages(
+        link,
+        response.pagination.page + 1,
+        parseInt(response.pagination.per_page),
+      )
     }
   })
+}
+
+var parse_member_response = (api_member) => ({
+  name: api_member.officialName,
+  image: `https://www.congress.gov/img/member/${api_member._id.toLowerCase()}_200.jpg`,
 })
+
+pullRecordPages(`https://clerkapi.azure-api.net/Members/v1/?key=${key}`, 0, 0)
 
 var Page = styled.div`
 height: 100vh;
