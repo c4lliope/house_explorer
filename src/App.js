@@ -1,6 +1,6 @@
 import Grid from "react-data-grid"
 import styled from "styled-components"
-import { makeAutoObservable, autorun } from "mobx"
+import { makeAutoObservable, autorun, runInAction } from "mobx"
 import { Observer, observer } from "mobx-react"
 
 // API endpoints:
@@ -41,16 +41,17 @@ var pullRecordPages = (link, page, per_page) => {
   fetch(link + `&$skip=${page * per_page}`)
   .then(response => response.json())
   .then(response => {
-    response.results.forEach(api_member => {
-      if(api_member.active === "yes") {
-        memory.members.push(parse_member_response(api_member))
-      }
+    runInAction(() => {
+      response.results.forEach(api_member => {
+        if(api_member.active === "yes") {
+          memory.members.push(parse_member_response(api_member))
+        }
+      })
     })
     return response
   })
   .then(response => {
     if(response.pagination.page !== response.pagination.number_pages) {
-      console.log(response.pagination.page)
       pullRecordPages(
         link,
         response.pagination.page + 1,
