@@ -12,7 +12,30 @@ var key = process.env.REACT_APP_API_KEY
 class Memory {
   members = []
   votes = []
-  constructor() { makeAutoObservable(this) }
+
+  constructor() {
+    var cached_votes = localStorage.getItem("memory_votes")
+    var cached_members = localStorage.getItem("memory_members")
+
+    if(cached_votes) this.votes = JSON.parse(cached_votes)
+    if(cached_members) this.members = JSON.parse(cached_members)
+
+    makeAutoObservable(this)
+
+    autorun(() => {
+      var cache = JSON.stringify(this.votes.toJSON())
+      if(cached_votes !== cache) {
+        localStorage.setItem("memory_votes", cache)
+      }
+    })
+
+    autorun(() => {
+      var cache = JSON.stringify(this.members.toJSON())
+      if(cached_members !== cache) {
+        localStorage.setItem("memory_members", cache)
+      }
+    })
+  }
 }
 
 var memory = new Memory()
@@ -31,6 +54,18 @@ function App() {
 
   return (
     <Page>
+      <div>
+        <button onClick={() => {
+          runInAction(() => {
+            memory.members = []
+            memory.votes = []
+          })
+          pull_members()
+          pull_votes()
+        }} >
+          Reload records
+        </button>
+      </div>
       <Grid columns={columns} rows={memory.votes} />
     </Page>
   );
@@ -68,29 +103,40 @@ var record_member_response = member_response => {
   }
 }
 
+var parse_vote_response = (vote_response) => ({
+  rollCallNum: vote_response.rollCallNum,
+  endDate: vote_response.endDate,
+  name: vote_response.name,
+  legisNum: vote_response.legisNum,
+  result: vote_response.result,
+  voteType: vote_response.voteType,
+})
+
 var record_vote_response = vote_response => {
-  memory.votes.push(vote_response)
+  memory.votes.push(parse_vote_response(vote_response))
 }
 
-pullPagedRecords(
+var pull_members = () => pullPagedRecords(
   `https://clerkapi.azure-api.net/Members/v1/?key=${key}`,
   0,
   0,
   record_member_response,
 )
 
-pullPagedRecords(
+var pull_votes = () => pullPagedRecords(
   `https://clerkapi.azure-api.net/Votes/v1/?$filter=superEvent/superEvent/congressNum%20eq%20%27117%27&key=${key}`,
   0,
   0,
   record_vote_response,
 )
 
+if(memory.members.length === 0) pull_members()
+if(memory.votes.length === 0) pull_votes()
 
 var Page = styled.div`
 height: 100vh;
 display: grid;
-grid-template-rows: 1fr;
+grid-template-rows: 4rem 1fr;
 
 .rdg {
 height: 100%;
