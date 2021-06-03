@@ -37,8 +37,8 @@ function App() {
   );
 }
 
-var pullRecordPages = (link, page, per_page, callback) => {
-  fetch(link + `&$skip=${page * per_page}`)
+var pullPagedRecords = (link, page, per_page, callback) => {
+  fetch(link + `&$skip=${page * per_page}`) // + `&$top=${per_page}`
   .then(response => response.json())
   .then(response => {
     runInAction(() => {
@@ -48,7 +48,7 @@ var pullRecordPages = (link, page, per_page, callback) => {
   })
   .then(response => {
     if(response.pagination.page !== response.pagination.number_pages) {
-      pullRecordPages(
+      pullPagedRecords(
         link,
         response.pagination.page + 1,
         parseInt(response.pagination.per_page),
@@ -69,7 +69,7 @@ var record_member_response = member_response => {
   }
 }
 
-pullRecordPages(
+pullPagedRecords(
   `https://clerkapi.azure-api.net/Members/v1/?key=${key}`,
   0,
   0,
