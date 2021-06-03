@@ -38,11 +38,17 @@ plus some additional sources:
 
 ## Build Schedule
 
-* Preamble (Day 0)
+* Day 0 (Preamble)
   * Read challenge.
   * Begin producing README, decide on goals.
   * Begin designing program.
   * Launch codebase; run `create-react-app` and add dependencies.
+* Day 1 (1 hour)
+  * Place a grid on page.
+  * Add a memory model using `mobx`.
+  * Load in one page of records from the clerk API.
+* Day 2
+  * Build a pager function to load in all member records.
 
 ## Commands
 
