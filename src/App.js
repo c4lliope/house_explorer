@@ -37,16 +37,12 @@ function App() {
   );
 }
 
-var pullRecordPages = (link, page, per_page) => {
+var pullRecordPages = (link, page, per_page, callback) => {
   fetch(link + `&$skip=${page * per_page}`)
   .then(response => response.json())
   .then(response => {
     runInAction(() => {
-      response.results.forEach(api_member => {
-        if(api_member.active === "yes") {
-          memory.members.push(parse_member_response(api_member))
-        }
-      })
+      response.results.forEach(callback)
     })
     return response
   })
@@ -56,17 +52,29 @@ var pullRecordPages = (link, page, per_page) => {
         link,
         response.pagination.page + 1,
         parseInt(response.pagination.per_page),
+        callback,
       )
     }
   })
 }
 
-var parse_member_response = (api_member) => ({
-  name: api_member.officialName,
-  image: `https://www.congress.gov/img/member/${api_member._id.toLowerCase()}_200.jpg`,
+var parse_member_response = (member_response) => ({
+  name: member_response.officialName,
+  image: `https://www.congress.gov/img/member/${member_response._id.toLowerCase()}_200.jpg`,
 })
 
-pullRecordPages(`https://clerkapi.azure-api.net/Members/v1/?key=${key}`, 0, 0)
+var record_member_response = member_response => {
+  if(member_response.active === "yes") {
+    memory.members.push(parse_member_response(member_response))
+  }
+}
+
+pullRecordPages(
+  `https://clerkapi.azure-api.net/Members/v1/?key=${key}`,
+  0,
+  0,
+  record_member_response,
+)
 
 var Page = styled.div`
 height: 100vh;

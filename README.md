@@ -49,6 +49,7 @@ plus some additional sources:
   * Load in one page of records from the clerk API.
 * Day 2
   * Build a pager function to load in all member records.
+  * Make pager function generic to handle a second API endpoint.
 
 ## Commands
 
