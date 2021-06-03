@@ -11,28 +11,33 @@ var key = process.env.REACT_APP_API_KEY
 
 class Memory {
   members = []
+  votes = []
   constructor() { makeAutoObservable(this) }
 }
 
 var memory = new Memory()
 
 var columns = [
-  {
-    key: "image",
-    name: "Image",
-    formatter: ({ row }) => (
-      <img style={{ height: "80px" }} src={row.image} alt={row.name} />
-    ),
-  },
-  { key: "name", name: "Name" },
+  { key: "rollCallNum", name: "Number" },
+  { key: "endDate", name: "Date" },
+  { key: "name", name: "Name", resizable: true },
+  { key: "committee", name: "Committee", formatter: (row) => (
+    (row.committee === "U.S. House of Representatives") ? "" : <span>{row.committee}</span>
+  )},
+  { key: "legisNum", name: "Code" },
+  { key: "result", name: "Result" },
+  { key: "voteQuestion", name: "Question", formatter: (row) => (
+    (row.name === row.voteQuestion) ? "" : row.voteQuestion
+  )},
+  { key: "voteType", name: "Type" },
 ]
 
 function App() {
-  console.log("rendering", memory.members.length, "members")
+  console.log("rendering", memory.votes.length, "votes")
 
   return (
     <Page>
-      <Grid columns={columns} rows={memory.members} rowHeight={() => 80 }/>
+      <Grid columns={columns} rows={memory.votes} />
     </Page>
   );
 }
@@ -69,12 +74,24 @@ var record_member_response = member_response => {
   }
 }
 
+var record_vote_response = vote_response => {
+  memory.votes.push(vote_response)
+}
+
 pullPagedRecords(
   `https://clerkapi.azure-api.net/Members/v1/?key=${key}`,
   0,
   0,
   record_member_response,
 )
+
+pullPagedRecords(
+  `https://clerkapi.azure-api.net/Votes/v1/?$filter=superEvent/superEvent/congressNum%20eq%20%27117%27&key=${key}`,
+  0,
+  0,
+  record_vote_response,
+)
+
 
 var Page = styled.div`
 height: 100vh;
