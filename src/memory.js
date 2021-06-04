@@ -58,6 +58,7 @@ class Memory {
 
   parse_member_response = (member_response) => ({
     name: member_response.officialName,
+    number: member_response._id,
     image: `https://www.congress.gov/img/member/${member_response._id.toLowerCase()}_200.jpg`,
   })
 

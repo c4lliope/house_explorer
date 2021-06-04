@@ -1,40 +1,17 @@
 import Grid from "react-data-grid"
 import styled from "styled-components"
 import { runInAction } from "mobx"
-import { Observer, observer } from "mobx-react"
+import { observer } from "mobx-react"
 import { Icon, InlineIcon } from '@iconify/react';
 import expandFromCorner from '@iconify-icons/uil/expand-from-corner';
 
+import codeLink, { Link } from "./code_link"
+import colorResult from "./color"
 import Dialogue from "./dialogue"
 import Memory from "./memory"
 import RollCall from "./roll_call"
 
 var memory = new Memory()
-
-var codeLink = (code) => {
-  var link = null
-  if(code.match(/^HCONRES\d+$/)) link = `/bill/117th-congress/house-concurrent-resolution/${code.slice(7)}`
-  if(code.match(/^HRES\d+$/)) link = `/bill/117th-congress/house-resolution/${code.slice(4)}`
-  if(code.match(/^HJRES\d+$/)) link = `/bill/117th-congress/house-joint-resolution/${code.slice(5)}`
-  if(code.match(/^HR\d+$/)) link = `/bill/117th-congress/house-bill/${code.slice(2)}`
-  if(code.match(/^S\d+$/)) link = `/bill/117th-congress/senate-bill/${code.slice(1)}`
-
-  return (
-    link
-    ? <Link href={`https://congress.gov${link}`} target="_blank">{code}</Link>
-    : code
-  )
-}
-
-var colorResult = (result) => (
-  (result === "Passed" || result === "Agreed to")
-  ? <Green>{result}</Green>
-
-  : result === "Failed"
-  ? <Red>{result}</Red>
-
-  : result
-)
 
 var columns = [
   { key: "rollCallNum", name: "Number", width: 40, formatter: ({row}) => (
@@ -116,21 +93,9 @@ h1 { align-self: center; }
 button { align-self: flex-start; }
 `
 
-var Link = styled.a`
-color: #5c84a7;
-`
-
 var OpenLink = styled(Link)`
 display: flex;
 justify-content: space-between;
-`
-
-var Green = styled.span`
-color: #439243;
-`
-
-var Red = styled.span`
-color: #c35a5a;
 `
 
 memory.displayRollCall('6')
