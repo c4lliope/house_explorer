@@ -1,43 +1,15 @@
 import Grid from "react-data-grid"
 import styled from "styled-components"
-import { makeAutoObservable, autorun, runInAction } from "mobx"
+import { runInAction } from "mobx"
 import { Observer, observer } from "mobx-react"
+
+import Memory from "./memory.js"
 
 // API endpoints:
 // `https://clerkapi.azure-api.net/Votes/v1/?$filter=superEvent/superEvent/congressNum%20eq%20%27117%27&key=${key}`
 // `https://clerkapi.azure-api.net/Members/v1/?key=${key}`
 
 var key = process.env.REACT_APP_API_KEY
-
-class Memory {
-  members = []
-  votes = []
-
-  constructor() {
-    var cached_votes = localStorage.getItem("memory_votes")
-    var cached_members = localStorage.getItem("memory_members")
-
-    if(cached_votes) this.votes = JSON.parse(cached_votes)
-    if(cached_members) this.members = JSON.parse(cached_members)
-
-    makeAutoObservable(this)
-
-    autorun(() => {
-      var cache = JSON.stringify(this.votes.toJSON())
-      if(cached_votes !== cache) {
-        localStorage.setItem("memory_votes", cache)
-      }
-    })
-
-    autorun(() => {
-      var cache = JSON.stringify(this.members.toJSON())
-      if(cached_members !== cache) {
-        localStorage.setItem("memory_members", cache)
-      }
-    })
-  }
-}
-
 var memory = new Memory()
 
 var columns = [
