@@ -42,7 +42,7 @@ var memory = new Memory()
 
 var columns = [
   { key: "rollCallNum", name: "Number", width: 40 },
-  { key: "endDate", name: "Date" },
+  { key: "endDate", name: "Date", width: 160 },
   { key: "name", name: "Name", width: 360, resizable: true },
   { key: "legisNum", name: "Code", width: 100 },
   { key: "result", name: "Result", width: 100 },
