@@ -98,5 +98,4 @@ display: flex;
 justify-content: space-between;
 `
 
-memory.displayRollCall('6')
 export default observer(App)
