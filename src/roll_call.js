@@ -1,20 +1,44 @@
 import styled from "styled-components"
 import { observer } from "mobx-react"
 
+import memberImage from "./member_image"
 import codeLink from "./code_link"
 import colorResult from "./color"
+
+var Member = ({ number, name }) => (
+  <Member.Border>
+    <img src={memberImage(number)} alt={name} />
+    {name}
+  </Member.Border>
+)
+
+Member.Border = styled.div`
+border: 4px solid black;
+display: flex;
+flex-direction: column;
+width: 80px;
+
+img {
+height: 80px;
+width: 60px;
+}
+`
 
 var Board = ({ roll_call, vote, members }) => (
   <div>
     <h3>{vote}</h3>
-    {roll_call.scoreboard[vote].map(member_number => {
-      var member = members.filter(m => m.number === member_number)[0]
-      return (
-        member
-        ? <li>{member.name}</li>
-        : <>{member_number}<br/></>
-      )
-    })}
+
+    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      {roll_call.scoreboard[vote].map(member_number => {
+        var member = members.filter(m => m.number === member_number)[0]
+
+        return (
+          member
+          ? <Member number={member.number} name={member.name} />
+          : <Member number={member_number} name={member_number} />
+        )
+      })}
+    </div>
   </div>
 )
 
