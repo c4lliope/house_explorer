@@ -153,6 +153,8 @@ height: 100vh;
 display: grid;
 grid-template-rows: auto 1fr;
 padding: 2rem;
+background: #bbe4c6;
+color: #3d3b11;
 
 .rdg {
 height: 100%;
