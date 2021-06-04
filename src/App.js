@@ -70,21 +70,22 @@ var App = () => (
         <span style={{marginLeft: "1rem"}}>
           {memory.votes.length} roll calls loaded,&nbsp;
           {memory.members.length} members loaded.
-
-          {memory.displayed &&
-            <Dialogue.Background onClick={() => memory.displayRollCall(null)}>
-              <Dialogue onClick={(e) => { e.stopPropagation() }}>
-                <RollCall record={memory.displayed} members={memory.members} />
-              </Dialogue>
-            </Dialogue.Background>
-          }
         </span>
       </div>
 
       <h1>U.S. House of Representatives</h1>
       <span style={{ textAlign: "center" }}>Roll Call Record</span>
     </Heading>
+
     <Grid columns={columns} rows={memory.votes} />
+
+    {memory.displayed &&
+      <Dialogue.Background onClick={() => memory.displayRollCall(null)}>
+        <Dialogue onClick={(e) => { e.stopPropagation() }}>
+          <RollCall record={memory.displayed} members={memory.members} />
+        </Dialogue>
+      </Dialogue.Background>
+    }
   </Page>
 );
 
