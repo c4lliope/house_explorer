@@ -153,6 +153,10 @@ grid-template-rows: 4rem 1fr;
 .rdg {
 height: 100%;
 }
+.rdg-cell {
+background: #f8f6bb;
+color: #3d3b11;
+}
 `
 
 export default observer(App)
