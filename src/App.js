@@ -9,11 +9,11 @@ var memory = new Memory()
 
 var codeLink = (code) => {
   var link = null
-  if(code.match(/^HCONRES\d+$/)) link = "/"
-  if(code.match(/^HRES\d+$/)) link = "/"
-  if(code.match(/^HJRES\d+$/)) link = "/"
-  if(code.match(/^HR\d+$/)) link = "/"
-  if(code.match(/^S\d+$/)) link = "/"
+  if(code.match(/^HCONRES\d+$/)) link = `/`
+  if(code.match(/^HRES\d+$/)) link = `/bill/117th-congress/house-resolution/${code.slice(4)}`
+  if(code.match(/^HJRES\d+$/)) link = `/`
+  if(code.match(/^HR\d+$/)) link = `/bill/117th-congress/house-bill/${code.slice(2)}`
+  if(code.match(/^S\d+$/)) link = `/`
 
   return (
     link
