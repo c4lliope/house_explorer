@@ -34,7 +34,8 @@ function App() {
           </button>
 
           <span style={{marginLeft: "1rem"}}>
-            {memory.votes.length} roll calls loaded.
+            {memory.votes.length} roll calls loaded,&nbsp;
+            {memory.members.length} members loaded.
           </span>
         </div>
 
