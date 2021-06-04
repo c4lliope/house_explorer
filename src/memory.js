@@ -9,6 +9,7 @@ var key = process.env.REACT_APP_API_KEY
 class Memory {
   members = []
   votes = []
+  displayed = null
 
   constructor() {
     var cached_votes = localStorage.getItem("memory_votes")
@@ -103,6 +104,14 @@ class Memory {
     0,
     this.record_vote_response,
   )
+
+  displayRollCall = (number) => {
+    runInAction(() => {
+      this.displayed =
+        this.votes.filter(v => v.rollCallNum === number)[0]
+        || null
+    })
+  }
 }
 
 export default Memory

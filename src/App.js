@@ -2,6 +2,8 @@ import Grid from "react-data-grid"
 import styled from "styled-components"
 import { runInAction } from "mobx"
 import { Observer, observer } from "mobx-react"
+import { Icon, InlineIcon } from '@iconify/react';
+import expandFromCorner from '@iconify-icons/uil/expand-from-corner';
 
 import Memory from "./memory.js"
 
@@ -33,7 +35,12 @@ var colorResult = (result) => (
 )
 
 var columns = [
-  { key: "rollCallNum", name: "Number", width: 40 },
+  { key: "rollCallNum", name: "Number", width: 40, formatter: ({row}) => (
+    <OpenLink onClick={() => memory.displayRollCall(row.rollCallNum)} >
+      <span>{row.rollCallNum}</span>
+      <span><Icon icon={expandFromCorner} /></span>
+    </OpenLink>
+  )},
   { key: "endDate", name: "Date", width: 160 },
   { key: "legisNum", name: "Code", width: 100, formatter: ({row}) => codeLink(row.legisNum) },
   { key: "name", name: "Name", width: 360, resizable: true },
@@ -60,6 +67,12 @@ var App = () => (
         <span style={{marginLeft: "1rem"}}>
           {memory.votes.length} roll calls loaded,&nbsp;
           {memory.members.length} members loaded.
+
+          <br/>
+          {memory.displayed
+            &&
+            `Displaying ${memory.displayed.rollCallNum}`
+          }
         </span>
       </div>
 
@@ -101,6 +114,11 @@ button { align-self: flex-start; }
 
 var Link = styled.a`
 color: #5c84a7;
+`
+
+var OpenLink = styled(Link)`
+display: flex;
+justify-content: space-between;
 `
 
 var Green = styled.span`
