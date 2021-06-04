@@ -43,10 +43,10 @@ var columns = [
   )},
   { key: "endDate", name: "Date", width: 160 },
   { key: "legisNum", name: "Code", width: 100, formatter: ({row}) => codeLink(row.legisNum) },
-  { key: "name", name: "Name", width: 360, resizable: true },
+  { key: "name", name: "Name", resizable: true },
   { key: "result", name: "Result", width: 100, formatter: ({row}) => colorResult(row.result) },
-  { key: "voteType", name: "Type" },
-  { key: "rollCall", name: "Roll Call" },
+  { key: "voteType", name: "Type", width: 160 },
+  { key: "rollCall", name: "Roll Call", width: 160 },
 ]
 
 var App = () => (
