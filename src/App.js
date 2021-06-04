@@ -41,11 +41,11 @@ class Memory {
 var memory = new Memory()
 
 var columns = [
-  { key: "rollCallNum", name: "Number" },
+  { key: "rollCallNum", name: "Number", width: 40 },
   { key: "endDate", name: "Date" },
-  { key: "name", name: "Name", resizable: true },
-  { key: "legisNum", name: "Code" },
-  { key: "result", name: "Result" },
+  { key: "name", name: "Name", width: 360, resizable: true },
+  { key: "legisNum", name: "Code", width: 100 },
+  { key: "result", name: "Result", width: 100 },
   { key: "voteType", name: "Type" },
   { key: "rollCall", name: "Roll Call" },
 ]
