@@ -16,12 +16,15 @@ Member.Border = styled.div`
 border: 4px solid black;
 display: flex;
 flex-direction: column;
-width: 80px;
 
 img {
 height: 80px;
 width: 60px;
 }
+
+width: 80px;
+height: 120px;
+font-size: 0.8rem;
 `
 
 var Board = ({ roll_call, vote, members }) => (
