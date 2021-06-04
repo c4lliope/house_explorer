@@ -5,7 +5,8 @@ import { Observer, observer } from "mobx-react"
 import { Icon, InlineIcon } from '@iconify/react';
 import expandFromCorner from '@iconify-icons/uil/expand-from-corner';
 
-import Memory from "./memory.js"
+import Dialogue from "./dialogue"
+import Memory from "./memory"
 
 var memory = new Memory()
 
@@ -69,9 +70,11 @@ var App = () => (
           {memory.members.length} members loaded.
 
           <br/>
-          {memory.displayed
-            &&
-            `Displaying ${memory.displayed.rollCallNum}`
+          {memory.displayed &&
+            <Dialogue.Background onClick={() => memory.displayRollCall(null)}>
+              <Dialogue onClick={(e) => { e.stopPropagation() }}>
+              </Dialogue>
+            </Dialogue.Background>
           }
         </span>
       </div>
