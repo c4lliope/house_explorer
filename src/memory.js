@@ -62,9 +62,7 @@ class Memory {
   })
 
   record_member_response = member_response => {
-    if(member_response.active === "yes") {
-      this.members.push(this.parse_member_response(member_response))
-    }
+    this.members.push(this.parse_member_response(member_response))
   }
 
   parse_vote_response = (vote_response) => {
