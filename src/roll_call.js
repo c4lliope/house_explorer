@@ -29,7 +29,7 @@ font-size: 0.8rem;
 
 var Board = ({ roll_call, vote, members }) => (
   <div>
-    <h3>{vote}</h3>
+    <h3>{vote} – {roll_call.scoreboard[vote].length}</h3>
 
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {roll_call.scoreboard[vote].map(member_number => {
