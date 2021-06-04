@@ -55,7 +55,7 @@ function App() {
 
   return (
     <Page>
-      <div>
+      <Heading>
         <button onClick={() => {
           runInAction(() => {
             memory.members = []
@@ -66,7 +66,10 @@ function App() {
         }} >
           Reload records
         </button>
-      </div>
+
+        <h1>U.S. House of Representatives</h1>
+        <caption>Roll Call Voting Record</caption>
+      </Heading>
       <Grid columns={columns} rows={memory.votes} />
     </Page>
   );
@@ -148,7 +151,7 @@ if(memory.votes.length === 0) pull_votes()
 var Page = styled.div`
 height: 100vh;
 display: grid;
-grid-template-rows: 4rem 1fr;
+grid-template-rows: auto 1fr;
 padding: 2rem;
 
 .rdg {
@@ -158,6 +161,15 @@ height: 100%;
 background: #f8f6bb;
 color: #3d3b11;
 }
+`
+
+var Heading = styled.div`
+display: flex;
+flex-direction: column;
+margin-bottom: 2rem;
+
+h1 { align-self: center; }
+button { align-self: flex-start; }
 `
 
 export default observer(App)
