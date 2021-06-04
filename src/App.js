@@ -133,4 +133,5 @@ var Red = styled.span`
 color: #c35a5a;
 `
 
+memory.displayRollCall('6')
 export default observer(App)
