@@ -5,15 +5,19 @@ import memberImage from "./member_image"
 import codeLink from "./code_link"
 import colorResult from "./color"
 
-var Member = ({ number, name }) => (
-  <Member.Border>
+var Member = observer(({ number, name, side }) => (
+  <Member.Border color={
+      side === "Republican" ? "#c35a5a"
+      : side === "Democrat" ? "#5c84a7"
+      : "#3d3b11"
+  } >
     <img src={memberImage(number)} alt={name} />
     {name}
   </Member.Border>
-)
+))
 
 Member.Border = styled.div`
-border: 4px solid black;
+border: 4px solid ${({color}) => color};
 display: flex;
 flex-direction: column;
 
@@ -27,7 +31,7 @@ height: 120px;
 font-size: 0.8rem;
 `
 
-var Board = ({ roll_call, vote, members }) => (
+var Board = observer(({ roll_call, vote, members }) => (
   <div>
     <h3>{vote} – {roll_call.scoreboard[vote].length}</h3>
 
@@ -37,13 +41,13 @@ var Board = ({ roll_call, vote, members }) => (
 
         return (
           member
-          ? <Member number={member.number} name={member.name} />
-          : <Member number={member_number} name={member_number} />
+          ? <Member number={member.number} name={member.name} side={member.side} />
+          : <Member number={member_number} name={member_number} side={null} />
         )
       })}
     </div>
   </div>
-)
+))
 
 var RollCall = ({ record, members }) => (
   <>

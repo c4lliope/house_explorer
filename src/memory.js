@@ -59,6 +59,11 @@ class Memory {
   parse_member_response = (member_response) => ({
     name: member_response.officialName,
     number: member_response._id,
+    side: member_response
+    .congresses
+    .filter(c => parseInt(c.congressNum) === 117)[0]
+    .partyAffiliations[0]
+    .name
   })
 
   record_member_response = member_response => {
