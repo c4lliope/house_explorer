@@ -149,6 +149,7 @@ var Page = styled.div`
 height: 100vh;
 display: grid;
 grid-template-rows: 4rem 1fr;
+padding: 2rem;
 
 .rdg {
 height: 100%;
