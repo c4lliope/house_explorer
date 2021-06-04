@@ -47,7 +47,7 @@ plus some additional sources:
   * Place a grid on page.
   * Add a memory model using `mobx`.
   * Load in one page of records from the clerk API.
-* Day 2
+* Day 2 (2 hours)
   * Build a pager function to load in all member records.
   * Make pager function generic to handle a second API endpoint.
   * Realize designed interface is very clunky for so many members.
