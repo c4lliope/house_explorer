@@ -7,11 +7,26 @@ import Memory from "./memory.js"
 
 var memory = new Memory()
 
+var codeLink = (code) => {
+  var link = null
+  if(code.match(/^HCONRES\d+$/)) link = "/"
+  if(code.match(/^HRES\d+$/)) link = "/"
+  if(code.match(/^HJRES\d+$/)) link = "/"
+  if(code.match(/^HR\d+$/)) link = "/"
+  if(code.match(/^S\d+$/)) link = "/"
+
+  return (
+    link
+    ? <Link href={`https://congress.gov${link}`} >{code}</Link>
+    : code
+  )
+}
+
 var columns = [
   { key: "rollCallNum", name: "Number", width: 40 },
   { key: "endDate", name: "Date", width: 160 },
   { key: "name", name: "Name", width: 360, resizable: true },
-  { key: "legisNum", name: "Code", width: 100 },
+  { key: "legisNum", name: "Code", width: 100, formatter: ({row}) => codeLink(row.legisNum) },
   { key: "result", name: "Result", width: 100 },
   { key: "voteType", name: "Type" },
   { key: "rollCall", name: "Roll Call" },
@@ -74,6 +89,10 @@ margin-bottom: 2rem;
 
 h1 { align-self: center; }
 button { align-self: flex-start; }
+`
+
+var Link = styled.a`
+color: #3a4ede;
 `
 
 export default observer(App)
