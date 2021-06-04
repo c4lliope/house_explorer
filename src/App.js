@@ -17,7 +17,7 @@ var codeLink = (code) => {
 
   return (
     link
-    ? <Link href={`https://congress.gov${link}`} >{code}</Link>
+    ? <Link href={`https://congress.gov${link}`} target="_blank">{code}</Link>
     : code
   )
 }
