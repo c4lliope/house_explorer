@@ -22,12 +22,22 @@ var codeLink = (code) => {
   )
 }
 
+var colorResult = (result) => (
+  (result === "Passed" || result === "Agreed to")
+  ? <Green>{result}</Green>
+
+  : result === "Failed"
+  ? <Red>{result}</Red>
+
+  : result
+)
+
 var columns = [
   { key: "rollCallNum", name: "Number", width: 40 },
   { key: "endDate", name: "Date", width: 160 },
   { key: "legisNum", name: "Code", width: 100, formatter: ({row}) => codeLink(row.legisNum) },
   { key: "name", name: "Name", width: 360, resizable: true },
-  { key: "result", name: "Result", width: 100 },
+  { key: "result", name: "Result", width: 100, formatter: ({row}) => colorResult(row.result) },
   { key: "voteType", name: "Type" },
   { key: "rollCall", name: "Roll Call" },
 ]
@@ -90,7 +100,15 @@ button { align-self: flex-start; }
 `
 
 var Link = styled.a`
-color: #3a4ede;
+color: #5c84a7;
+`
+
+var Green = styled.span`
+color: #439243;
+`
+
+var Red = styled.span`
+color: #c35a5a;
 `
 
 export default observer(App)
