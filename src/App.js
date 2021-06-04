@@ -73,7 +73,7 @@ var App = () => (
           {memory.displayed &&
             <Dialogue.Background onClick={() => memory.displayRollCall(null)}>
               <Dialogue onClick={(e) => { e.stopPropagation() }}>
-                <RollCall record={memory.displayed} />
+                <RollCall record={memory.displayed} members={memory.members} />
               </Dialogue>
             </Dialogue.Background>
           }
