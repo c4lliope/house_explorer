@@ -2,7 +2,7 @@ import Grid from "react-data-grid"
 import styled from "styled-components"
 import { runInAction } from "mobx"
 import { observer } from "mobx-react"
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import expandFromCorner from '@iconify-icons/uil/expand-from-corner';
 
 import codeLink, { Link } from "./code_link"
