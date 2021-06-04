@@ -9,6 +9,8 @@ bottom: 10%;
 background: #f8f6bb;
 border: 4px solid #3d3b11;
 border-radius: 8px;
+padding: 2rem;
+overflow-y: scroll;
 `
 
 Dialogue.Background = styled.div`
