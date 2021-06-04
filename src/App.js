@@ -4,6 +4,7 @@ import { runInAction } from "mobx"
 import { observer } from "mobx-react"
 import { Icon } from '@iconify/react';
 import expandFromCorner from '@iconify-icons/uil/expand-from-corner';
+import error from '@iconify-icons/uil/bolt-slash';
 
 import codeLink, { Link } from "./code_link"
 import colorResult from "./color"
@@ -31,6 +32,29 @@ var columns = [
 var App = () => (
   <Page>
     <Heading>
+      {process.env.REACT_APP_API_KEY
+        ? null
+        :
+        <div style={{
+          border: "4px solid #c35a5a",
+          borderRadius: "8px",
+          margin: "2rem",
+          display: "flex",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }} >
+          <Icon icon={error} width="40" />
+          <span style={{ marginLeft: "2rem" }}>
+            Please add a House Clerk API key in
+            &nbsp;<code>.env</code>&nbsp;
+            and relaunch the application.
+
+            <br/>Example:<br/>
+            <pre>REACT_APP_API_KEY=abc123</pre>
+          </span>
+        </div>
+      }
+
       <div>
         <button onClick={() => {
           runInAction(() => {
