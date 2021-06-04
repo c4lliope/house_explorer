@@ -58,7 +58,7 @@ var App = () => (
       </div>
 
       <h1>U.S. House of Representatives</h1>
-      <span>Roll Call Record</span>
+      <span style={{ textAlign: "center" }}>Roll Call Record</span>
     </Heading>
     <Grid columns={columns} rows={memory.votes} />
   </Page>
