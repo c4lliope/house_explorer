@@ -32,35 +32,33 @@ var columns = [
   { key: "rollCall", name: "Roll Call" },
 ]
 
-function App() {
-  return (
-    <Page>
-      <Heading>
-        <div>
-          <button onClick={() => {
-            runInAction(() => {
-              memory.members = []
-              memory.votes = []
-            })
-            memory.pull_members()
-            memory.pull_votes()
-          }} >
-            Reload records
-          </button>
+var App = () => (
+  <Page>
+    <Heading>
+      <div>
+        <button onClick={() => {
+          runInAction(() => {
+            memory.members = []
+            memory.votes = []
+          })
+          memory.pull_members()
+          memory.pull_votes()
+        }} >
+          Reload records
+        </button>
 
-          <span style={{marginLeft: "1rem"}}>
-            {memory.votes.length} roll calls loaded,&nbsp;
-            {memory.members.length} members loaded.
-          </span>
-        </div>
+        <span style={{marginLeft: "1rem"}}>
+          {memory.votes.length} roll calls loaded,&nbsp;
+          {memory.members.length} members loaded.
+        </span>
+      </div>
 
-        <h1>U.S. House of Representatives</h1>
-        <caption>Roll Call Voting Record</caption>
-      </Heading>
-      <Grid columns={columns} rows={memory.votes} />
-    </Page>
-  );
-}
+      <h1>U.S. House of Representatives</h1>
+      <caption>Roll Call Voting Record</caption>
+    </Heading>
+    <Grid columns={columns} rows={memory.votes} />
+  </Page>
+);
 
 if(memory.members.length === 0) memory.pull_members()
 if(memory.votes.length === 0) memory.pull_votes()
