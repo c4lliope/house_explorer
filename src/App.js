@@ -9,11 +9,11 @@ var memory = new Memory()
 
 var codeLink = (code) => {
   var link = null
-  if(code.match(/^HCONRES\d+$/)) link = `/`
+  if(code.match(/^HCONRES\d+$/)) link = `/bill/117th-congress/house-concurrent-resolution/${code.slice(7)}`
   if(code.match(/^HRES\d+$/)) link = `/bill/117th-congress/house-resolution/${code.slice(4)}`
-  if(code.match(/^HJRES\d+$/)) link = `/`
+  if(code.match(/^HJRES\d+$/)) link = `/bill/117th-congress/house-joint-resolution/${code.slice(5)}`
   if(code.match(/^HR\d+$/)) link = `/bill/117th-congress/house-bill/${code.slice(2)}`
-  if(code.match(/^S\d+$/)) link = `/`
+  if(code.match(/^S\d+$/)) link = `/bill/117th-congress/senate-bill/${code.slice(1)}`
 
   return (
     link
@@ -25,8 +25,8 @@ var codeLink = (code) => {
 var columns = [
   { key: "rollCallNum", name: "Number", width: 40 },
   { key: "endDate", name: "Date", width: 160 },
-  { key: "name", name: "Name", width: 360, resizable: true },
   { key: "legisNum", name: "Code", width: 100, formatter: ({row}) => codeLink(row.legisNum) },
+  { key: "name", name: "Name", width: 360, resizable: true },
   { key: "result", name: "Result", width: 100 },
   { key: "voteType", name: "Type" },
   { key: "rollCall", name: "Roll Call" },
