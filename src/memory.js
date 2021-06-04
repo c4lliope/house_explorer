@@ -67,25 +67,36 @@ class Memory {
     }
   }
 
-  parse_vote_response = (vote_response) => ({
-    rollCallNum: vote_response.rollCallNum,
-    endDate: vote_response.endDate,
-    name: vote_response.name,
-    legisNum: vote_response.legisNum,
-    result: vote_response.result,
-    voteType: vote_response.voteType,
-    rollCall: vote_response.voteTotals
-    ? `${
-      vote_response.voteTotals.filter(r => r.option === "yea")[0].total
-    } - ${
-      vote_response.voteTotals.filter(r => r.option === "nay")[0].total
-    } - ${
-      vote_response.voteTotals.filter(r => r.option === "present")[0].total
-    } - ${
-      vote_response.voteTotals.filter(r => r.option === "not-voting")[0].total
-    }`
-    : ""
-  })
+  parse_vote_response = (vote_response) => {
+    var scoreboard = {}
+    vote_response.members.forEach(member => {
+      if(!scoreboard[member.vote])
+        scoreboard[member.vote] = []
+
+      scoreboard[member.vote].push(member.usCongressBio)
+    })
+
+    return {
+      scoreboard,
+      rollCallNum: vote_response.rollCallNum,
+      endDate: vote_response.endDate,
+      name: vote_response.name,
+      legisNum: vote_response.legisNum,
+      result: vote_response.result,
+      voteType: vote_response.voteType,
+      rollCall: vote_response.voteTotals
+      ? `${
+        vote_response.voteTotals.filter(r => r.option === "yea")[0].total
+      } - ${
+        vote_response.voteTotals.filter(r => r.option === "nay")[0].total
+      } - ${
+        vote_response.voteTotals.filter(r => r.option === "present")[0].total
+      } - ${
+        vote_response.voteTotals.filter(r => r.option === "not-voting")[0].total
+      }`
+      : "",
+    }
+  }
 
   record_vote_response = vote_response => {
     this.votes.push(this.parse_vote_response(vote_response))
