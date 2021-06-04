@@ -64,7 +64,7 @@ var App = () => (
           memory.pull_members()
           memory.pull_votes()
         }} >
-          Reload records
+          Clear cache and reload records
         </button>
 
         <span style={{marginLeft: "1rem"}}>
