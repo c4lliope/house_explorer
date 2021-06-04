@@ -58,7 +58,7 @@ var App = () => (
       </div>
 
       <h1>U.S. House of Representatives</h1>
-      <caption>Roll Call Record</caption>
+      <span>Roll Call Record</span>
     </Heading>
     <Grid columns={columns} rows={memory.votes} />
   </Page>
