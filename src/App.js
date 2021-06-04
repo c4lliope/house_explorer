@@ -47,6 +47,7 @@ var columns = [
   { key: "legisNum", name: "Code" },
   { key: "result", name: "Result" },
   { key: "voteType", name: "Type" },
+  { key: "rollCall", name: "Roll Call" },
 ]
 
 function App() {
@@ -110,6 +111,17 @@ var parse_vote_response = (vote_response) => ({
   legisNum: vote_response.legisNum,
   result: vote_response.result,
   voteType: vote_response.voteType,
+  rollCall: vote_response.voteTotals
+  ? `${
+    vote_response.voteTotals.filter(r => r.option === "yea")[0].total
+  } - ${
+    vote_response.voteTotals.filter(r => r.option === "nay")[0].total
+  } - ${
+    vote_response.voteTotals.filter(r => r.option === "present")[0].total
+  } - ${
+    vote_response.voteTotals.filter(r => r.option === "not-voting")[0].total
+  }`
+  : ""
 })
 
 var record_vote_response = vote_response => {
