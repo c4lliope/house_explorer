@@ -7,6 +7,7 @@ import expandFromCorner from '@iconify-icons/uil/expand-from-corner';
 
 import Dialogue from "./dialogue"
 import Memory from "./memory"
+import RollCall from "./roll_call"
 
 var memory = new Memory()
 
@@ -69,10 +70,10 @@ var App = () => (
           {memory.votes.length} roll calls loaded,&nbsp;
           {memory.members.length} members loaded.
 
-          <br/>
           {memory.displayed &&
             <Dialogue.Background onClick={() => memory.displayRollCall(null)}>
               <Dialogue onClick={(e) => { e.stopPropagation() }}>
+                <RollCall record={memory.displayed} />
               </Dialogue>
             </Dialogue.Background>
           }
