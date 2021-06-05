@@ -1,17 +1,18 @@
 # *House* Coding Challenge
 
 This codebase includes a response to the coding challenge
-issued by the House of Representatives' Clerk's office.
-Namely, building an application to display API records
+issued by the House of Representatives' Clerk's office.  
+The response is an application displaying API records
 of members and roll call votes for the 117th congress.
 
-My goals are to build up in iterations a program to explore the records,
-mixing and matching as the user pleases.
+My goals are to build up a program to explore the roll call records.  
 To accomplish this goal I will use libraries I am experienced with, including:
 
 * [React](https://reactjs.org/)
-* styled-components
-* Mobx
+* [styled-components](https://styled-components.com/)
+* [Mobx](https://mobx.js.org/README.html)
+* [Iconify](https://iconify.design/)
+* [React-data-grid](https://adazzle.github.io/react-data-grid/)
 
 The program will pull records from the recommended API channels,
 plus some additional sources:
@@ -19,15 +20,17 @@ plus some additional sources:
 * `clerkapi.azure-api.net/Members/v1/...`
 * `clerkapi.azure-api.net/Votes/v1/...`
 * `congress.gov/img/member/...`
+* `congress.gov/bill/...`
 
 ## Goals
 
 * Secure code
-  * No recorded API key in the public codebase. (use `.env` file and ask in-app)
+  * No recorded API key in the public codebase.
+  (use `.env` file and remind in-app)
 * Dense display of records
   * Add a couple of visualizations to ease exploration
-    * one mini, dense, high-level graph displaying summary of roll calls
-    * one per-member table to see individuals' voting records.
+    * one mini, dense, high-level ~~graph~~ displaying summary of roll calls
+    * ~~one per-member table to see individuals' voting records.~~
   * Use a datatable, such as `react-table` or `react-data-grid` packages.
   * Display member images from `congress.gov`. (Check: any XSS restrictions? no)
   * Optionally group members by party and caucus affiliation, display breakdown.
@@ -54,12 +57,29 @@ plus some additional sources:
   * Query second API call and reconfigure table to show vote counts.
   * Explore the voting records manually and decide on a new design approach.
   * Cache long-running API calls using LocalStorage.
+* Day 3 (5 hours)
+  * Polish roll call grid, using colors, spacing, and record links.
+  * Add a modal dialogue box displaying a single roll call.
+  * Reorganize code in `src/`, making several helper modules.
+  * Parse member names and party affiliations from API.
+  * Display members in a "scoreboard" for each roll call, colored by ideology.
+  * Add an error message when the API key is missing.
+
+## Running Locally
+
+Please make and add a line in the codebase's `.env`;
+
+```
+REACT_APP_API_KEY=<your-api-key>
+```
+
+Then use `yarn go` to run the program.
 
 ## Commands
 
 You can run:
 
-* `yarn start`
+* `yarn go`
 
 > Runs the app in the development mode.\
 > Open [http://localhost:3000](http://localhost:3000) to view it in the
