@@ -37,7 +37,7 @@ plus some additional sources:
 
 > Early designs
 
-![early designs](images/early_designs.svg =400x600)
+![early designs](./images/early_designs.svg)
 
 ## Build Schedule
 
@@ -75,8 +75,8 @@ REACT_APP_API_KEY=<your-api-key>
 
 Then use `yarn go` to run the program.
 
-![roll call grid](images/roll_call_grid)
-![member scoreboard](images/member_scoreboard)
+![roll call grid](./images/roll_call_grid.png)
+![member scoreboard](./images/member_scoreboard.png)
 
 ## Commands
 
